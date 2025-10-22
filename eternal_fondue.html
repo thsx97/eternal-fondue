@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Eternal Fondue 🫕</title>
+  <style>
+    body {
+      background: url('https://i.imgur.com/V1f8Q3C.gif'); /* retro cheese tile */
+      color: #fff;
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-shadow: 2px 2px 6px #000;
+      margin-top: 20px;
+    }
+
+    #fondue {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      image-rendering: pixelated;
+    }
+
+    #status {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.2em;
+    }
+
+    .burned {
+      background: black url('https://i.imgur.com/HBgO7WJ.gif') center/cover no-repeat;
+      transition: background 2s;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Eternal Fondue 🫕</h1>
+  <img id="fondue" src="https://i.imgur.com/4thmFUz.gif" alt="Fondue Pot" />
+  <div id="status">Keep stirring to stop it from burning!</div>
+
+  <script>
+    let burnTimer = 0;
+    const burnLimit = 300; // 5 minutes (300 seconds)
+    let isBurning = false;
+    const fondue = document.getElementById('fondue');
+    const status = document.getElementById('status');
+
+    function stirFondue() {
+      if (isBurning) return;
+      burnTimer = 0;
+      status.textContent = '🌀 Stirring the fondue...';
+      fondue.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 10 - 5}deg)`;
+      setTimeout(() => {
+        status.textContent = 'Keep stirring to stop it from burning!';
+      }, 2000);
+    }
+
+    setInterval(() => {
+      if (isBurning) return;
+      burnTimer++;
+      const timeLeft = burnLimit - burnTimer;
+      if (timeLeft <= 0) {
+        burnFondue();
+      } else if (timeLeft < 60) {
+        status.textContent = `🔥 It's getting hot! ${timeLeft}s before it burns!`;
+      }
+    }, 1000);
+
+    function burnFondue() {
+      isBurning = true;
+      document.body.classList.add('burned');
+      fondue.src = 'https://i.imgur.com/6F9FhDK.gif'; // burned fondue
+      status.textContent = '💀 You burned the fondue! Refresh to try again.';
+    }
+
+    window.addEventListener('mousemove', stirFondue);
+    window.addEventListener('touchmove', stirFondue);
+  </script>
+</body>
+</html>
