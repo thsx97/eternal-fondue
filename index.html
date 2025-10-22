@@ -6,7 +6,7 @@
   <title>The Eternal Fondue 🫕</title>
   <style>
     body {
-      background: url('https://i.imgur.com/V1f8Q3C.gif'); /* retro cheese tile */
+      background: url('bg.jpg') repeat;
       color: #fff;
       text-align: center;
       font-family: 'Comic Sans MS', cursive;
@@ -40,14 +40,14 @@
     }
 
     .burned {
-      background: black url('https://i.imgur.com/HBgO7WJ.gif') center/cover no-repeat;
+      background: black url('bg_burned.jpg') center/cover no-repeat;
       transition: background 2s;
     }
   </style>
 </head>
 <body>
   <h1>The Eternal Fondue 🫕</h1>
-  <img id="fondue" src="https://i.imgur.com/4thmFUz.gif" alt="Fondue Pot" />
+  <img id="fondue" src="pot.jpg" alt="Fondue Pot" />
   <div id="status">Keep stirring to stop it from burning!</div>
 
   <script>
@@ -81,7 +81,7 @@
     function burnFondue() {
       isBurning = true;
       document.body.classList.add('burned');
-      fondue.src = 'https://i.imgur.com/6F9FhDK.gif'; // burned fondue
+      fondue.src = 'pot_burned.jpg'; // burned fondue
       status.textContent = '💀 You burned the fondue! Refresh to try again.';
     }
 
